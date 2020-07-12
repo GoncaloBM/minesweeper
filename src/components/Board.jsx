@@ -4,6 +4,7 @@ import { Cell } from "./Cell";
 
 export const Board = () => {
   const [gameLoaded, setGameLoaded] = useState(false);
+  const [bombsLoaded, setBombsLoaded] = useState(false);
   const [board, setBoard] = useState([]);
   const rows = 5;
   const cellsPerRow = 5;
@@ -30,6 +31,8 @@ export const Board = () => {
       }
       numberOfBombs--;
     }
+
+    setBombsLoaded(true);
   };
 
   const generateCells = () => {
@@ -62,7 +65,10 @@ export const Board = () => {
     if (!gameLoaded) {
       generateCells();
     }
-    randomBombs();
+
+    if (!bombsLoaded && gameLoaded) {
+      randomBombs();
+    }
   }, [gameLoaded, board]);
 
   return (
