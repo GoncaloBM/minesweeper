@@ -1,18 +1,14 @@
 import React, { useState } from "react";
 import "./Cell.css";
 
-export const Cell = ({ bomb, value }) => {
-  const [visibleValue, setVisibleValue] = useState(false);
-  const exposeValue = () => {
-    setVisibleValue(true);
-  };
+export const Cell = ({ bomb, value, showValue, coordenates, visible }) => {
   return (
     <div
       className="cell"
-      style={{ backgroundColor:  bomb && "red" }}
-      onClick={exposeValue}
+      style={{ backgroundColor: bomb && "red" }}
+      onClick={() => showValue(coordenates.x, coordenates.y)}
     >
-      {!visibleValue ? "" : value}
+      {!visible ? "" : value}
     </div>
   );
 };

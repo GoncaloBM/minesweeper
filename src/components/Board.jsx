@@ -68,7 +68,19 @@ export const Board = () => {
     setBoard(allCells);
   };
 
-  const showValue = (coordX, coordY) => {};
+  const showValue = (coordX, coordY) => {
+    let boardToChange = [...board];
+
+    for (let i = 0; i < boardToChange.length; i++) {
+      if (
+        boardToChange[i]["coordenates"]["x"] === coordX &&
+        boardToChange[i]["coordenates"]["y"] === coordY
+      ) {
+        boardToChange[i]["visible"] = true;
+        setBoard(boardToChange);
+      }
+    }
+  };
 
   const generateValues = () => {
     let currentBoard = board;
@@ -150,6 +162,8 @@ export const Board = () => {
     if (!valuesLoaded && bombsLoaded && gameLoaded) {
       generateValues();
     }
+
+    console.log(board);
   }, [gameLoaded, bombsLoaded]);
 
   return (
@@ -164,6 +178,8 @@ export const Board = () => {
             flag={cell.flag}
             bomb={cell.bomb}
             value={cell.value}
+            showValue={showValue}
+            visible={cell.visible}
           />
         );
       })}
