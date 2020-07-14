@@ -1,5 +1,10 @@
 .cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 50px;
   width: 50px;
   border: 1px solid black;
+
+  cursor: pointer;
 }
