@@ -7,30 +7,30 @@ export const Board = ({ dificulty }) => {
   const [bombsLoaded, setBombsLoaded] = useState(false);
   const [valuesLoaded, setValuesLoaded] = useState(false);
   const [board, setBoard] = useState([]);
-  const rows = 6;
-  const cellsPerRow = 6;
+  const [rows, setRows] = useState(9);
+  const [cellsPerRow, setCellsPerRows] = useState(9);
+  const [bombs, setBombs] = useState(10);
 
-  const cells = rows * cellsPerRow;
   const [cellsToWin, setCellsToWin] = useState(rows * cellsPerRow);
 
-  const win = cel => {
+  const win = (cel) => {
     let cellsWining = cel;
     cellsWining--;
 
-    if (cellsWining === 5) {
+    if (cellsWining === bombs) {
       alert("You Win!");
     }
 
     return cellsWining;
   };
 
-  const randomBombs = () => {
-    let numberOfBombs = 5;
+  const randomBombs = (all) => {
+    let currentBoard = all;
+    let numberOfBombs = bombs;
     while (numberOfBombs) {
       let bombRow = Math.floor(Math.random() * rows) + 1;
       let bombCell = Math.floor(Math.random() * cellsPerRow) + 1;
 
-      let currentBoard = board;
       let placedBomb = false;
 
       for (let i = 0; i < currentBoard.length; i++) {
@@ -40,7 +40,6 @@ export const Board = ({ dificulty }) => {
           currentBoard[i]["bomb"] === false
         ) {
           currentBoard[i]["bomb"] = true;
-          setBoard(currentBoard);
           placedBomb = true;
         }
       }
@@ -49,11 +48,11 @@ export const Board = ({ dificulty }) => {
         numberOfBombs--;
       }
     }
-
-    setBombsLoaded(true);
+    generateValues(currentBoard);
   };
 
   const generateCells = () => {
+    const cells = rows * cellsPerRow;
     let allCells = [];
 
     let currentRow = 1;
@@ -65,7 +64,7 @@ export const Board = ({ dificulty }) => {
         flag: false,
         bomb: false,
         value: 0,
-        visible: false
+        visible: false,
       });
 
       currentCell++;
@@ -75,9 +74,7 @@ export const Board = ({ dificulty }) => {
         currentRow++;
       }
     }
-
-    setGameLoaded(true);
-    setBoard(allCells);
+    randomBombs(allCells);
   };
 
   const showValue = (coordX, coordY) => {
@@ -114,7 +111,7 @@ export const Board = ({ dificulty }) => {
       { x: clickX + 1, y: clickY },
       { x: clickX - 1, y: clickY + 1 },
       { x: clickX, y: clickY + 1 },
-      { x: clickX + 1, y: clickY + 1 }
+      { x: clickX + 1, y: clickY + 1 },
     ];
     for (let i = 0; i < neightoChange.length; i++) {
       for (let j = 0; j < neighboursToCheck.length; j++) {
@@ -122,39 +119,39 @@ export const Board = ({ dificulty }) => {
           neightoChange[i]["coordenates"]["x"] === neighboursToCheck[j]["x"] &&
           neightoChange[i]["coordenates"]["y"] === neighboursToCheck[j]["y"]
         ) {
-          if (neightoChange[i]["value"] === 0) {
+          if (neightoChange[i]["value"] === 0 && !neightoChange[i]["visible"]) {
             neighboursToCheck.push(
               {
                 x: neightoChange[i]["coordenates"]["x"] - 1,
-                y: neightoChange[i]["coordenates"]["y"] - 1
+                y: neightoChange[i]["coordenates"]["y"] - 1,
               },
               {
                 x: neightoChange[i]["coordenates"]["x"],
-                y: neightoChange[i]["coordenates"]["y"] - 1
+                y: neightoChange[i]["coordenates"]["y"] - 1,
               },
               {
                 x: neightoChange[i]["coordenates"]["x"] + 1,
-                y: neightoChange[i]["coordenates"]["y"] - 1
+                y: neightoChange[i]["coordenates"]["y"] - 1,
               },
               {
                 x: neightoChange[i]["coordenates"]["x"] - 1,
-                y: neightoChange[i]["coordenates"]["y"]
+                y: neightoChange[i]["coordenates"]["y"],
               },
               {
                 x: neightoChange[i]["coordenates"]["x"] + 1,
-                y: neightoChange[i]["coordenates"]["y"]
+                y: neightoChange[i]["coordenates"]["y"],
               },
               {
                 x: neightoChange[i]["coordenates"]["x"] - 1,
-                y: neightoChange[i]["coordenates"]["y"] + 1
+                y: neightoChange[i]["coordenates"]["y"] + 1,
               },
               {
                 x: neightoChange[i]["coordenates"]["x"],
-                y: neightoChange[i]["coordenates"]["y"] + 1
+                y: neightoChange[i]["coordenates"]["y"] + 1,
               },
               {
                 x: neightoChange[i]["coordenates"]["x"] + 1,
-                y: neightoChange[i]["coordenates"]["y"] + 1
+                y: neightoChange[i]["coordenates"]["y"] + 1,
               }
             );
           }
@@ -169,60 +166,60 @@ export const Board = ({ dificulty }) => {
     setCellsToWin(cellsWin - 1);
   };
 
-  const generateValues = () => {
-    let currentBoard = board;
-    for (let i = 0; i < board.length; i++) {
-      let currentX = board[i]["coordenates"]["x"];
-      let currentY = board[i]["coordenates"]["y"];
+  const generateValues = (boardWithBombs) => {
+    let currentBoard = boardWithBombs;
+    for (let i = 0; i < currentBoard.length; i++) {
+      let currentX = currentBoard[i]["coordenates"]["x"];
+      let currentY = currentBoard[i]["coordenates"]["y"];
 
-      if (board[i]["bomb"] === false) {
-        for (let j = 0; j < board.length; j++) {
+      if (currentBoard[i]["bomb"] === false) {
+        for (let j = 0; j < currentBoard.length; j++) {
           if (
-            board[j]["coordenates"]["x"] === currentX - 1 &&
-            board[j]["coordenates"]["y"] === currentY - 1 &&
-            board[j]["bomb"] === true
+            currentBoard[j]["coordenates"]["x"] === currentX - 1 &&
+            currentBoard[j]["coordenates"]["y"] === currentY - 1 &&
+            currentBoard[j]["bomb"] === true
           ) {
             currentBoard[i]["value"]++;
           } else if (
-            board[j]["coordenates"]["x"] === currentX &&
-            board[j]["coordenates"]["y"] === currentY - 1 &&
-            board[j]["bomb"] === true
+            currentBoard[j]["coordenates"]["x"] === currentX &&
+            currentBoard[j]["coordenates"]["y"] === currentY - 1 &&
+            currentBoard[j]["bomb"] === true
           ) {
             currentBoard[i]["value"]++;
           } else if (
-            board[j]["coordenates"]["x"] === currentX + 1 &&
-            board[j]["coordenates"]["y"] === currentY - 1 &&
-            board[j]["bomb"] === true
+            currentBoard[j]["coordenates"]["x"] === currentX + 1 &&
+            currentBoard[j]["coordenates"]["y"] === currentY - 1 &&
+            currentBoard[j]["bomb"] === true
           ) {
             currentBoard[i]["value"]++;
           } else if (
-            board[j]["coordenates"]["x"] === currentX - 1 &&
-            board[j]["coordenates"]["y"] === currentY &&
-            board[j]["bomb"] === true
+            currentBoard[j]["coordenates"]["x"] === currentX - 1 &&
+            currentBoard[j]["coordenates"]["y"] === currentY &&
+            currentBoard[j]["bomb"] === true
           ) {
             currentBoard[i]["value"]++;
           } else if (
-            board[j]["coordenates"]["x"] === currentX + 1 &&
-            board[j]["coordenates"]["y"] === currentY &&
-            board[j]["bomb"] === true
+            currentBoard[j]["coordenates"]["x"] === currentX + 1 &&
+            currentBoard[j]["coordenates"]["y"] === currentY &&
+            currentBoard[j]["bomb"] === true
           ) {
             currentBoard[i]["value"]++;
           } else if (
-            board[j]["coordenates"]["x"] === currentX - 1 &&
-            board[j]["coordenates"]["y"] === currentY + 1 &&
-            board[j]["bomb"] === true
+            currentBoard[j]["coordenates"]["x"] === currentX - 1 &&
+            currentBoard[j]["coordenates"]["y"] === currentY + 1 &&
+            currentBoard[j]["bomb"] === true
           ) {
             currentBoard[i]["value"]++;
           } else if (
-            board[j]["coordenates"]["x"] === currentX &&
-            board[j]["coordenates"]["y"] === currentY + 1 &&
-            board[j]["bomb"] === true
+            currentBoard[j]["coordenates"]["x"] === currentX &&
+            currentBoard[j]["coordenates"]["y"] === currentY + 1 &&
+            currentBoard[j]["bomb"] === true
           ) {
             currentBoard[i]["value"]++;
           } else if (
-            board[j]["coordenates"]["x"] === currentX + 1 &&
-            board[j]["coordenates"]["y"] === currentY + 1 &&
-            board[j]["bomb"] === true
+            currentBoard[j]["coordenates"]["x"] === currentX + 1 &&
+            currentBoard[j]["coordenates"]["y"] === currentY + 1 &&
+            currentBoard[j]["bomb"] === true
           ) {
             currentBoard[i]["value"]++;
           }
@@ -234,7 +231,7 @@ export const Board = ({ dificulty }) => {
         setBoard(currentBoard);
       }
     }
-    setValuesLoaded(true);
+    setGameLoaded(true);
   };
 
   useEffect(() => {
@@ -242,14 +239,31 @@ export const Board = ({ dificulty }) => {
       generateCells();
     }
 
-    if (!bombsLoaded && gameLoaded) {
-      randomBombs();
-    }
+    // if (!bombsLoaded && gameLoaded) {
+    //   randomBombs();
+    // }
 
-    if (!valuesLoaded && bombsLoaded && gameLoaded) {
-      generateValues();
+    // if (!valuesLoaded && bombsLoaded && gameLoaded) {
+    //   generateValues();
+    // }
+    generateCells();
+    if (dificulty === "Easy") {
+      setRows(9);
+      setCellsPerRows(9);
+      setCellsToWin(9 * 9);
+      setBombs(10);
+    } else if (dificulty === "Medium") {
+      setRows(16);
+      setCellsPerRows(16);
+      setCellsToWin(16 * 16);
+      setBombs(40);
+    } else if (dificulty === "Hard") {
+      setRows(16);
+      setCellsPerRows(30);
+      setCellsToWin(16 * 30);
+      setBombs(99);
     }
-  }, [gameLoaded, bombsLoaded]);
+  }, [gameLoaded, dificulty, rows, cellsPerRow]);
 
   return (
     <div
