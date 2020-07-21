@@ -2,18 +2,30 @@ import React, { useState, useEffect } from "react";
 import "./Board.css";
 import { Cell } from "./Cell";
 
-export const Board = () => {
+export const Board = ({ dificulty }) => {
   const [gameLoaded, setGameLoaded] = useState(false);
   const [bombsLoaded, setBombsLoaded] = useState(false);
   const [valuesLoaded, setValuesLoaded] = useState(false);
   const [board, setBoard] = useState([]);
-  const rows = 5;
-  const cellsPerRow = 5;
+  const rows = 6;
+  const cellsPerRow = 6;
+
   const cells = rows * cellsPerRow;
+  const [cellsToWin, setCellsToWin] = useState(rows * cellsPerRow);
+
+  const win = cel => {
+    let cellsWining = cel;
+    cellsWining--;
+
+    if (cellsWining === 5) {
+      alert("You Win!");
+    }
+
+    return cellsWining;
+  };
 
   const randomBombs = () => {
     let numberOfBombs = 5;
-
     while (numberOfBombs) {
       let bombRow = Math.floor(Math.random() * rows) + 1;
       let bombCell = Math.floor(Math.random() * cellsPerRow) + 1;
@@ -53,7 +65,7 @@ export const Board = () => {
         flag: false,
         bomb: false,
         value: 0,
-        visible: false,
+        visible: false
       });
 
       currentCell++;
@@ -78,8 +90,83 @@ export const Board = () => {
       ) {
         boardToChange[i]["visible"] = true;
         setBoard(boardToChange);
+
+        if (boardToChange[i]["value"] === 0) {
+          revealNeighbours(coordX, coordY);
+        } else if (boardToChange[i]["value"] > 0) {
+          setCellsToWin(win(cellsToWin));
+        } else if (boardToChange[i]["value"] === "B") {
+          alert("You loose, sorry!");
+        }
       }
     }
+  };
+
+  const revealNeighbours = (clickX, clickY) => {
+    let neightoChange = [...board];
+    let cellsWin = cellsToWin;
+
+    let neighboursToCheck = [
+      { x: clickX - 1, y: clickY - 1 },
+      { x: clickX, y: clickY - 1 },
+      { x: clickX + 1, y: clickY - 1 },
+      { x: clickX - 1, y: clickY },
+      { x: clickX + 1, y: clickY },
+      { x: clickX - 1, y: clickY + 1 },
+      { x: clickX, y: clickY + 1 },
+      { x: clickX + 1, y: clickY + 1 }
+    ];
+    for (let i = 0; i < neightoChange.length; i++) {
+      for (let j = 0; j < neighboursToCheck.length; j++) {
+        if (
+          neightoChange[i]["coordenates"]["x"] === neighboursToCheck[j]["x"] &&
+          neightoChange[i]["coordenates"]["y"] === neighboursToCheck[j]["y"]
+        ) {
+          if (neightoChange[i]["value"] === 0) {
+            neighboursToCheck.push(
+              {
+                x: neightoChange[i]["coordenates"]["x"] - 1,
+                y: neightoChange[i]["coordenates"]["y"] - 1
+              },
+              {
+                x: neightoChange[i]["coordenates"]["x"],
+                y: neightoChange[i]["coordenates"]["y"] - 1
+              },
+              {
+                x: neightoChange[i]["coordenates"]["x"] + 1,
+                y: neightoChange[i]["coordenates"]["y"] - 1
+              },
+              {
+                x: neightoChange[i]["coordenates"]["x"] - 1,
+                y: neightoChange[i]["coordenates"]["y"]
+              },
+              {
+                x: neightoChange[i]["coordenates"]["x"] + 1,
+                y: neightoChange[i]["coordenates"]["y"]
+              },
+              {
+                x: neightoChange[i]["coordenates"]["x"] - 1,
+                y: neightoChange[i]["coordenates"]["y"] + 1
+              },
+              {
+                x: neightoChange[i]["coordenates"]["x"],
+                y: neightoChange[i]["coordenates"]["y"] + 1
+              },
+              {
+                x: neightoChange[i]["coordenates"]["x"] + 1,
+                y: neightoChange[i]["coordenates"]["y"] + 1
+              }
+            );
+          }
+          if (neightoChange[i]["visible"] === false) {
+            cellsWin = win(cellsWin);
+          }
+          neightoChange[i]["visible"] = true;
+        }
+      }
+    }
+    setBoard(neightoChange);
+    setCellsToWin(cellsWin - 1);
   };
 
   const generateValues = () => {
@@ -162,8 +249,6 @@ export const Board = () => {
     if (!valuesLoaded && bombsLoaded && gameLoaded) {
       generateValues();
     }
-
-    console.log(board);
   }, [gameLoaded, bombsLoaded]);
 
   return (
