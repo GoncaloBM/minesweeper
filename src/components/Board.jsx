@@ -258,30 +258,37 @@ export const Board = ({ dificulty }) => {
       setCellsToWin(16 * 16);
       setBombs(40);
     } else if (dificulty === "Hard") {
-      setRows(16);
-      setCellsPerRows(30);
+      setRows(30);
+      setCellsPerRows(16);
       setCellsToWin(16 * 30);
       setBombs(99);
     }
   }, [gameLoaded, dificulty, rows, cellsPerRow]);
 
   return (
-    <div
-      className="board"
-      style={{ display: "grid", gridTemplateColumns: `repeat(${rows},auto)` }}
-    >
-      {board.map((cell, index) => {
-        return (
-          <Cell
-            coordenates={cell.coordenates}
-            flag={cell.flag}
-            bomb={cell.bomb}
-            value={cell.value}
-            showValue={showValue}
-            visible={cell.visible}
-          />
-        );
-      })}
+    <div className="game">
+      <div
+        className="board"
+        style={{
+          display: "grid",
+          gridTemplateColumns: `repeat(${rows},auto)`,
+          width: dificulty === "Easy" ? "450px" : "",
+        }}
+      >
+        {board.map((cell, index) => {
+          return (
+            <Cell
+              coordenates={cell.coordenates}
+              flag={cell.flag}
+              bomb={cell.bomb}
+              value={cell.value}
+              showValue={showValue}
+              visible={cell.visible}
+              dificulty={dificulty}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };
