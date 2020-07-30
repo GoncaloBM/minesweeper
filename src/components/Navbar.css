@@ -1,0 +1,12 @@
+.title {
+    font-size: 3rem;
+  }
+  
+  .reset {
+    width: 70px;
+    height: 70px;
+    border: 1px solid black;
+    background-size: cover;
+    background-position: center;
+  }
+  
