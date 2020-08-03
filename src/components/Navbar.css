@@ -1,12 +1,34 @@
 .title {
-    font-size: 3rem;
-  }
-  
-  .reset {
-    width: 70px;
-    height: 70px;
-    border: 1px solid black;
-    background-size: cover;
-    background-position: center;
-  }
-  
+  font-size: 3rem;
+}
+
+.reset {
+  width: 70px;
+  height: 70px;
+  border: 1px solid black;
+  background-size: cover;
+  background-position: center;
+  margin: 10px;
+}
+
+.info {
+  padding: 5px 20px 5px 20px;
+  background-color: black;
+  color: red;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.info-image {
+  height: 80%;
+  width: 40px;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.info-number {
+  width: 30%;
+}

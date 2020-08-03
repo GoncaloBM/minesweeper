@@ -1,0 +1,30 @@
+.end-menu {
+  width: 60%;
+  height: 30%;
+  border: 1px solid black;
+
+  position: fixed;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background-color: blue;
+}
+
+.ok-button {
+  width: 50%;
+  height: 20%;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+  cursor: pointer;
+  transition: 0.3s all;
+}
+
+.ok-button:hover {
+  background-color: white;
+}

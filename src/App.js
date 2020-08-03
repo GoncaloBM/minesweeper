@@ -3,20 +3,25 @@ import "./App.css";
 import { Board } from "./components/Board.jsx";
 import { Menu } from "./components/Menu";
 import { Navbar } from "./components/Navbar";
+import { EndMenu } from "./components/EndMenu";
 
 function App() {
+  const [gameLoaded, setGameLoaded] = useState(false);
   const [dificulty, setDificulty] = useState("Easy");
   const [gameStart, setGameStart] = useState(false);
   const [loose, setLoose] = useState(false);
-
-  const [gameLoaded, setGameLoaded] = useState(false);
   const [board, setBoard] = useState([]);
   const [rows, setRows] = useState(9);
   const [cellsPerRow, setCellsPerRows] = useState(9);
   const [bombs, setBombs] = useState(10);
+  const [flagsRemaining, setFlagsRemaining] = useState(0);
   const [cellsToWin, setCellsToWin] = useState(rows * cellsPerRow);
+  const [startTimer, setStartTimer] = useState(false);
+  const [time, setTime] = useState(0);
+  const [endMenu, setEndMenu] = useState(false);
 
   const generateCells = () => {
+    setFlagsRemaining(0);
     if (dificulty === "Easy") {
       setRows(9);
       setCellsPerRows(9);
@@ -46,7 +51,7 @@ function App() {
         flag: false,
         bomb: false,
         value: 0,
-        visible: false,
+        visible: false
       });
 
       currentCell++;
@@ -70,8 +75,8 @@ function App() {
 
       for (let i = 0; i < currentBoard.length; i++) {
         if (
-          currentBoard[i]["coordenates"]["x"] === bombCell &&
-          currentBoard[i]["coordenates"]["y"] === bombRow &&
+          currentBoard[i]["coordenates"]["x"] === bombRow &&
+          currentBoard[i]["coordenates"]["y"] === bombCell &&
           currentBoard[i]["bomb"] === false
         ) {
           currentBoard[i]["bomb"] = true;
@@ -151,7 +156,20 @@ function App() {
         setBoard(currentBoard);
       }
     }
-    setGameLoaded(true);
+  };
+
+  const checkRemainingFlags = () => {
+    let currentBoard = [...board];
+
+    let flagsInGame = 0;
+
+    for (let i = 0; i < currentBoard.length; i++) {
+      if (board[i].flag === true) {
+        flagsInGame++;
+      }
+    }
+
+    setFlagsRemaining(flagsInGame);
   };
 
   const changeDificulty = difi => {
@@ -160,28 +178,59 @@ function App() {
 
   const looseGame = () => {
     setLoose(true);
+    setStartTimer(false);
   };
 
   const resetGame = () => {
-    generateCells();
+    setStartTimer(false);
     setLoose(false);
+    generateCells();
+    setTimeout(() => {
+      setTime(0);
+    }, 1001);
+    setTimeout(() => {
+      setStartTimer(true);
+    }, 1200);
   };
 
   const startGame = () => {
     setGameStart(true);
+    setGameLoaded(true);
+    setStartTimer(true);
+  };
+
+  const timer = () => {
+    const nextTime = time + 1;
+    setTimeout(() => {
+      setTime(nextTime);
+    }, 1000);
   };
 
   useEffect(() => {
-    if (!gameLoaded) {
+    if (!gameLoaded || !gameStart) {
       generateCells();
     }
-    generateCells();
-  }, [gameLoaded, dificulty, rows, cellsPerRow]);
+
+    if (startTimer) {
+      timer();
+    }
+  }, [gameLoaded, dificulty, rows, cellsPerRow, time, startTimer]);
 
   return (
     <div className="App">
-      <div className="title">Minesweeper</div>
-      {gameStart === true && <Navbar loose={loose} resetGame={resetGame} />}
+      <div className="title" style={{ fontSize: "4rem" }}>
+        Minesweeper
+      </div>
+      {gameStart === true && (
+        <Navbar
+          loose={loose}
+          resetGame={resetGame}
+          bombs={bombs}
+          flagsRemaining={flagsRemaining}
+          time={time}
+          startGame={startGame}
+        />
+      )}
       {gameStart === true && (
         <Board
           dificulty={dificulty}
@@ -193,6 +242,10 @@ function App() {
           setBoard={setBoard}
           setCellsToWin={setCellsToWin}
           rows={rows}
+          checkRemainingFlags={checkRemainingFlags}
+          flagsRemaining={flagsRemaining}
+          setStartTimer={setStartTimer}
+          setEndMenu={setEndMenu}
         />
       )}
       {gameStart === false && (
@@ -202,6 +255,7 @@ function App() {
           dificultyApp={dificulty}
         />
       )}
+      {endMenu && <EndMenu loose={loose} setEndMenu={setEndMenu} />}
     </div>
   );
 }

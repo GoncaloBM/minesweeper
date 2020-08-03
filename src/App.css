@@ -6,10 +6,11 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-.title {
-  font-size: 3rem;
+  background: linear-gradient(
+    184deg,
+    rgba(195, 195, 212, 1) 0%,
+    rgba(255, 255, 255, 1) 70%
+  );
 }
 
 .App-logo {

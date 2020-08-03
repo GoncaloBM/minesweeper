@@ -11,14 +11,19 @@ export const Board = ({
   setBoard,
   setCellsToWin,
   cellsToWin,
-  loose
+  loose,
+  checkRemainingFlags,
+  flagsRemaining,
+  setStartTimer,
+  setEndMenu
 }) => {
   const win = cel => {
     let cellsWining = cel;
     cellsWining--;
 
     if (cellsWining === bombs) {
-      alert("You Win!");
+      setEndMenu(true);
+      setStartTimer(false);
     }
 
     return cellsWining;
@@ -31,7 +36,8 @@ export const Board = ({
       for (let i = 0; i < boardToChange.length; i++) {
         if (
           boardToChange[i]["coordenates"]["x"] === coordX &&
-          boardToChange[i]["coordenates"]["y"] === coordY
+          boardToChange[i]["coordenates"]["y"] === coordY &&
+          !boardToChange[i]["visible"]
         ) {
           boardToChange[i]["visible"] = true;
           setBoard(boardToChange);
@@ -42,7 +48,7 @@ export const Board = ({
             setCellsToWin(win(cellsToWin));
           } else if (boardToChange[i]["value"] === "B") {
             looseGame();
-            alert("You loose, sorry!");
+            setEndMenu(true);
           }
         }
       }
@@ -50,18 +56,31 @@ export const Board = ({
   };
 
   const showFlag = (coordX, coordY) => {
-    if (!loose) {
-      let boardToChange = [...board];
+    let boardToChange = [...board];
+    if (flagsRemaining < bombs - 1) {
+      if (!loose) {
+        for (let i = 0; i < boardToChange.length; i++) {
+          if (
+            boardToChange[i]["coordenates"]["x"] === coordX &&
+            boardToChange[i]["coordenates"]["y"] === coordY &&
+            !boardToChange[i]["visible"]
+          ) {
+            boardToChange[i]["flag"] = !boardToChange[i]["flag"];
+          }
+        }
+      }
+    } else {
       for (let i = 0; i < boardToChange.length; i++) {
         if (
           boardToChange[i]["coordenates"]["x"] === coordX &&
           boardToChange[i]["coordenates"]["y"] === coordY
         ) {
-          boardToChange[i]["flag"] = !boardToChange[i]["flag"];
-          setBoard(boardToChange);
+          boardToChange[i]["flag"] = false;
         }
       }
     }
+    setBoard(boardToChange);
+    checkRemainingFlags();
   };
 
   const revealNeighbours = (clickX, clickY) => {
@@ -78,52 +97,54 @@ export const Board = ({
       { x: clickX, y: clickY + 1 },
       { x: clickX + 1, y: clickY + 1 }
     ];
-    for (let i = 0; i < neightoChange.length; i++) {
-      for (let j = 0; j < neighboursToCheck.length; j++) {
+    for (let i = 0; i < neighboursToCheck.length; i++) {
+      for (let j = 0; j < neightoChange.length; j++) {
         if (
-          neightoChange[i]["coordenates"]["x"] === neighboursToCheck[j]["x"] &&
-          neightoChange[i]["coordenates"]["y"] === neighboursToCheck[j]["y"]
+          neightoChange[j]["coordenates"]["x"] === neighboursToCheck[i]["x"] &&
+          neightoChange[j]["coordenates"]["y"] === neighboursToCheck[i]["y"]
         ) {
-          if (neightoChange[i]["value"] === 0 && !neightoChange[i]["visible"]) {
+          if (neightoChange[j]["value"] === 0 && !neightoChange[j]["visible"]) {
             neighboursToCheck.push(
               {
-                x: neightoChange[i]["coordenates"]["x"] - 1,
-                y: neightoChange[i]["coordenates"]["y"] - 1
+                x: neighboursToCheck[i]["x"] - 1,
+                y: neighboursToCheck[i]["y"] - 1
               },
               {
-                x: neightoChange[i]["coordenates"]["x"],
-                y: neightoChange[i]["coordenates"]["y"] - 1
+                x: neighboursToCheck[i]["x"],
+                y: neighboursToCheck[i]["y"] - 1
               },
               {
-                x: neightoChange[i]["coordenates"]["x"] + 1,
-                y: neightoChange[i]["coordenates"]["y"] - 1
+                x: neighboursToCheck[i]["x"] + 1,
+                y: neighboursToCheck[i]["y"] - 1
               },
               {
-                x: neightoChange[i]["coordenates"]["x"] - 1,
-                y: neightoChange[i]["coordenates"]["y"]
+                x: neighboursToCheck[i]["x"] - 1,
+                y: neighboursToCheck[i]["y"]
               },
               {
-                x: neightoChange[i]["coordenates"]["x"] + 1,
-                y: neightoChange[i]["coordenates"]["y"]
+                x: neighboursToCheck[i]["x"] + 1,
+                y: neighboursToCheck[i]["y"]
               },
               {
-                x: neightoChange[i]["coordenates"]["x"] - 1,
-                y: neightoChange[i]["coordenates"]["y"] + 1
+                x: neighboursToCheck[i]["x"] - 1,
+                y: neighboursToCheck[i]["y"] + 1
               },
               {
-                x: neightoChange[i]["coordenates"]["x"],
-                y: neightoChange[i]["coordenates"]["y"] + 1
+                x: neighboursToCheck[i]["x"],
+                y: neighboursToCheck[i]["y"] + 1
               },
               {
-                x: neightoChange[i]["coordenates"]["x"] + 1,
-                y: neightoChange[i]["coordenates"]["y"] + 1
+                x: neighboursToCheck[i]["x"] + 1,
+                y: neighboursToCheck[i]["y"] + 1
               }
             );
           }
-          if (neightoChange[i]["visible"] === false) {
+          if (neightoChange[j]["visible"] === false) {
             cellsWin = win(cellsWin);
           }
-          neightoChange[i]["visible"] = true;
+          if (neightoChange[j]["flag"] === false) {
+            neightoChange[j]["visible"] = true;
+          }
         }
       }
     }
@@ -136,9 +157,15 @@ export const Board = ({
       <div
         className="board"
         style={{
+          border: "2px solid #7d7d7d",
           display: "grid",
           gridTemplateColumns: `repeat(${rows},auto)`,
-          width: dificulty === "Easy" ? "450px" : ""
+          width:
+            dificulty === "Easy"
+              ? `${rows * 50 + rows * 2 * 2}px`
+              : dificulty === "Medium"
+              ? `${rows * 28 + rows * 2 * 2}px`
+              : dificulty === "Hard" && `${rows * 25 + rows * 2 * 2}px`
         }}
       >
         {board.map((cell, index) => {

@@ -4,19 +4,10 @@
   justify-content: center;
   height: 50px;
   width: 50px;
-  border: 1px solid black;
 
   cursor: pointer;
 
-  background: rgb(195, 195, 212);
-  background: radial-gradient(
-    circle,
-    rgba(195, 195, 212, 1) 0%,
-    rgba(255, 255, 255, 1) 96%,
-    rgba(154, 154, 166, 1) 100%
-  );
-
-  font-size: 2rem;
+  font-size: 1.5rem;
 
   background-size: cover;
   background-position: center;
