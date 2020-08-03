@@ -41,7 +41,7 @@ export const Cell = ({
         borderLeft: !visible ? "2px solid white" : "2px solid #7d7d7d",
         borderRight: !visible ? "2px solid #707070" : "2px solid #7d7d7d",
         borderBottom: !visible ? "2px solid #707070" : "2px solid #7d7d7d",
-        width: dificulty === "Medium" ? "30px" : dificulty === "Hard" && "25px",
+        width: dificulty === "Medium" ? "28px" : dificulty === "Hard" && "25px",
         height:
           dificulty === "Medium" ? "28px" : dificulty === "Hard" && "25px",
         backgroundImage: flag
