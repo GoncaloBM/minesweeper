@@ -51,7 +51,7 @@ function App() {
         flag: false,
         bomb: false,
         value: 0,
-        visible: false
+        visible: false,
       });
 
       currentCell++;
@@ -64,7 +64,7 @@ function App() {
     randomBombs(allCells);
   };
 
-  const randomBombs = all => {
+  const randomBombs = (all) => {
     let currentBoard = all;
     let numberOfBombs = bombs;
     while (numberOfBombs) {
@@ -91,7 +91,7 @@ function App() {
     generateValues(currentBoard);
   };
 
-  const generateValues = boardWithBombs => {
+  const generateValues = (boardWithBombs) => {
     let currentBoard = boardWithBombs;
     for (let i = 0; i < currentBoard.length; i++) {
       let currentX = currentBoard[i]["coordenates"]["x"];
@@ -172,7 +172,7 @@ function App() {
     setFlagsRemaining(flagsInGame);
   };
 
-  const changeDificulty = difi => {
+  const changeDificulty = (difi) => {
     setDificulty(difi);
   };
 
@@ -218,7 +218,10 @@ function App() {
 
   return (
     <div className="App">
-      <div className="title" style={{ fontSize: "4rem" }}>
+      <div
+        className="game-title"
+        style={{ fontSize: "4rem" }}
+      >
         Minesweeper
       </div>
       {gameStart === true && (

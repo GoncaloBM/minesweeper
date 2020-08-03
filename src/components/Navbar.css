@@ -9,16 +9,20 @@
   background-size: cover;
   background-position: center;
   margin: 10px;
+  cursor: pointer;
 }
 
 .info {
-  padding: 5px 20px 5px 20px;
   background-color: black;
   color: red;
-  font-size: 1.5rem;
+  font-size: 2rem;
   display: flex;
   align-items: center;
   justify-content: space-around;
+  height: 50%;
+  width: 10%;
+  font-family: Crashed;
+  margin: 5px;
 }
 
 .info-image {
@@ -31,4 +35,12 @@
 
 .info-number {
   width: 30%;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 15%;
+  width: 100%;
 }

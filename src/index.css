@@ -11,3 +11,18 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@font-face {
+  font-family: 'Crashed';
+  src: local('Crashed'), url(./fonts/Crashed\ Scoreboard.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'GameOver';
+  src: local('GameOver'), url(./fonts/game_over.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Arcade';
+  src: local('Arcade'), url(./fonts/Arcade.TTF) format('truetype');
+}

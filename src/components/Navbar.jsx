@@ -15,7 +15,7 @@ export const Navbar = ({ loose, resetGame, flagsRemaining, bombs, time }) => {
         className="info-image"
         style={{
           backgroundImage:
-            "url(https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/9194672661559033162-512.png)",
+            "url(https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/237/bomb_1f4a3.png)",
         }}
       />
       <div className="info">
@@ -27,12 +27,27 @@ export const Navbar = ({ loose, resetGame, flagsRemaining, bombs, time }) => {
         className="reset"
         style={{
           backgroundImage: !loose
-            ? 'url("https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/8122551761583400157-512.png")'
-            : 'url("https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/8478740681583400158-512.png")',
+            ? 'url("https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/joypixels/257/grinning-face-with-big-eyes_1f603.png")'
+            : 'url("https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/joypixels/257/dizzy-face_1f635.png")',
+          backgroundColor: "#bdbdbd",
+          borderTop: "2px solid white",
+          borderLeft: "2px solid white",
+          borderRight: "2px solid #707070",
+          borderBottom: "2px solid #707070",
         }}
         onClick={resetGame}
       />
-      <div className="info">{formatNumber(bombs - flagsRemaining)}</div>
+      <div className="info">
+        <div className="info-number">
+          {formatNumber(bombs - flagsRemaining)[0]}
+        </div>
+        <div className="info-number">
+          {formatNumber(bombs - flagsRemaining)[1]}
+        </div>
+        <div className="info-number">
+          {formatNumber(bombs - flagsRemaining)[2]}
+        </div>
+      </div>
       <div
         className="info-image"
         style={{

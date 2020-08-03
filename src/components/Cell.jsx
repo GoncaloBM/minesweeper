@@ -35,6 +35,7 @@ export const Cell = ({
       className="cell"
       ref={outerRef}
       style={{
+        fontFamily:'Arcade',
         backgroundColor: visible && bomb ? "red" : "#bdbdbd",
         borderTop: !visible ? "2px solid white" : "2px solid #7d7d7d",
         borderLeft: !visible ? "2px solid white" : "2px solid #7d7d7d",
@@ -47,7 +48,7 @@ export const Cell = ({
           ? "url('https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/15574596561537355607-512.png')"
           : value === "B" &&
             visible &&
-            "url('https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/9194672661559033162-512.png')",
+            "url('https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/237/bomb_1f4a3.png')",
         color:
           value === "B" || value === 0
             ? "transparent"

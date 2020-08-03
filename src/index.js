@@ -2,6 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import './fonts/Crashed Scoreboard.ttf';
+import './fonts/game_over.ttf';
+import './fonts/Arcade.TTF'
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
