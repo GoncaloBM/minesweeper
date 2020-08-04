@@ -15,14 +15,18 @@ export const Board = ({
   checkRemainingFlags,
   flagsRemaining,
   setStartTimer,
-  setEndMenu
+  setEndMenu,
+  resetMenu,
+  winner,
+  setWinner,
 }) => {
-  const win = cel => {
+  const win = (cel) => {
     let cellsWining = cel;
     cellsWining--;
 
     if (cellsWining === bombs) {
       setEndMenu(true);
+      setWinner(true);
       setStartTimer(false);
     }
 
@@ -48,6 +52,7 @@ export const Board = ({
             setCellsToWin(win(cellsToWin));
           } else if (boardToChange[i]["value"] === "B") {
             looseGame();
+            showAllCells();
             setEndMenu(true);
           }
         }
@@ -95,7 +100,7 @@ export const Board = ({
       { x: clickX + 1, y: clickY },
       { x: clickX - 1, y: clickY + 1 },
       { x: clickX, y: clickY + 1 },
-      { x: clickX + 1, y: clickY + 1 }
+      { x: clickX + 1, y: clickY + 1 },
     ];
     for (let i = 0; i < neighboursToCheck.length; i++) {
       for (let j = 0; j < neightoChange.length; j++) {
@@ -107,35 +112,35 @@ export const Board = ({
             neighboursToCheck.push(
               {
                 x: neighboursToCheck[i]["x"] - 1,
-                y: neighboursToCheck[i]["y"] - 1
+                y: neighboursToCheck[i]["y"] - 1,
               },
               {
                 x: neighboursToCheck[i]["x"],
-                y: neighboursToCheck[i]["y"] - 1
+                y: neighboursToCheck[i]["y"] - 1,
               },
               {
                 x: neighboursToCheck[i]["x"] + 1,
-                y: neighboursToCheck[i]["y"] - 1
+                y: neighboursToCheck[i]["y"] - 1,
               },
               {
                 x: neighboursToCheck[i]["x"] - 1,
-                y: neighboursToCheck[i]["y"]
+                y: neighboursToCheck[i]["y"],
               },
               {
                 x: neighboursToCheck[i]["x"] + 1,
-                y: neighboursToCheck[i]["y"]
+                y: neighboursToCheck[i]["y"],
               },
               {
                 x: neighboursToCheck[i]["x"] - 1,
-                y: neighboursToCheck[i]["y"] + 1
+                y: neighboursToCheck[i]["y"] + 1,
               },
               {
                 x: neighboursToCheck[i]["x"],
-                y: neighboursToCheck[i]["y"] + 1
+                y: neighboursToCheck[i]["y"] + 1,
               },
               {
                 x: neighboursToCheck[i]["x"] + 1,
-                y: neighboursToCheck[i]["y"] + 1
+                y: neighboursToCheck[i]["y"] + 1,
               }
             );
           }
@@ -152,6 +157,16 @@ export const Board = ({
     setCellsToWin(cellsWin - 1);
   };
 
+  const showAllCells = () => {
+    let visibleBoard = board;
+
+    for (let i = 0; i < visibleBoard.length; i++) {
+      visibleBoard[i]["visible"] = true;
+    }
+
+    setBoard(visibleBoard);
+  };
+
   return (
     <div className="game">
       <div
@@ -165,7 +180,7 @@ export const Board = ({
               ? `${rows * 50 + rows * 2 * 2}px`
               : dificulty === "Medium"
               ? `${rows * 28 + rows * 2 * 2}px`
-              : dificulty === "Hard" && `${rows * 25 + rows * 2 * 2}px`
+              : dificulty === "Hard" && `${rows * 25 + rows * 2 * 2}px`,
         }}
       >
         {board.map((cell, index) => {
@@ -181,6 +196,9 @@ export const Board = ({
               loose={loose}
               showFlag={showFlag}
               board={board}
+              key={index}
+              resetMenu={resetMenu}
+              winner={winner}
             />
           );
         })}

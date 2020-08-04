@@ -4,12 +4,14 @@ import { Board } from "./components/Board.jsx";
 import { Menu } from "./components/Menu";
 import { Navbar } from "./components/Navbar";
 import { EndMenu } from "./components/EndMenu";
+import { ResetMenu } from "./components/ResetMenu";
 
 function App() {
   const [gameLoaded, setGameLoaded] = useState(false);
   const [dificulty, setDificulty] = useState("Easy");
   const [gameStart, setGameStart] = useState(false);
   const [loose, setLoose] = useState(false);
+  const [winner, setWinner] = useState(false);
   const [board, setBoard] = useState([]);
   const [rows, setRows] = useState(9);
   const [cellsPerRow, setCellsPerRows] = useState(9);
@@ -19,6 +21,7 @@ function App() {
   const [startTimer, setStartTimer] = useState(false);
   const [time, setTime] = useState(0);
   const [endMenu, setEndMenu] = useState(false);
+  const [resetMenu, setResetMenu] = useState(false);
 
   const generateCells = () => {
     setFlagsRemaining(0);
@@ -51,7 +54,7 @@ function App() {
         flag: false,
         bomb: false,
         value: 0,
-        visible: false,
+        visible: false
       });
 
       currentCell++;
@@ -64,7 +67,7 @@ function App() {
     randomBombs(allCells);
   };
 
-  const randomBombs = (all) => {
+  const randomBombs = all => {
     let currentBoard = all;
     let numberOfBombs = bombs;
     while (numberOfBombs) {
@@ -91,7 +94,7 @@ function App() {
     generateValues(currentBoard);
   };
 
-  const generateValues = (boardWithBombs) => {
+  const generateValues = boardWithBombs => {
     let currentBoard = boardWithBombs;
     for (let i = 0; i < currentBoard.length; i++) {
       let currentX = currentBoard[i]["coordenates"]["x"];
@@ -172,7 +175,7 @@ function App() {
     setFlagsRemaining(flagsInGame);
   };
 
-  const changeDificulty = (difi) => {
+  const changeDificulty = difi => {
     setDificulty(difi);
   };
 
@@ -184,6 +187,8 @@ function App() {
   const resetGame = () => {
     setStartTimer(false);
     setLoose(false);
+    setWinner(false);
+    setResetMenu(false);
     generateCells();
     setTimeout(() => {
       setTime(0);
@@ -197,6 +202,18 @@ function App() {
     setGameStart(true);
     setGameLoaded(true);
     setStartTimer(true);
+  };
+
+  const mainMenu = () => {
+    setLoose(false);
+    setWinner(false);
+    setGameStart(false);
+    setGameLoaded(false);
+    setStartTimer(false);
+    setResetMenu(false);
+    setTimeout(() => {
+      setTime(0);
+    }, 1001);
   };
 
   const timer = () => {
@@ -218,10 +235,7 @@ function App() {
 
   return (
     <div className="App">
-      <div
-        className="game-title"
-        style={{ fontSize: "4rem" }}
-      >
+      <div className="game-title" style={{ fontSize: "4rem" }}>
         Minesweeper
       </div>
       {gameStart === true && (
@@ -232,6 +246,8 @@ function App() {
           flagsRemaining={flagsRemaining}
           time={time}
           startGame={startGame}
+          setResetMenu={setResetMenu}
+          resetMenu={resetMenu}
         />
       )}
       {gameStart === true && (
@@ -249,6 +265,9 @@ function App() {
           flagsRemaining={flagsRemaining}
           setStartTimer={setStartTimer}
           setEndMenu={setEndMenu}
+          resetMenu={resetMenu}
+          winner={winner}
+          setWinner={setWinner}
         />
       )}
       {gameStart === false && (
@@ -258,7 +277,15 @@ function App() {
           dificultyApp={dificulty}
         />
       )}
+      {resetMenu && (
+        <ResetMenu
+          resetGame={resetGame}
+          mainMenu={mainMenu}
+          setResetMenu={setResetMenu}
+        />
+      )}
       {endMenu && <EndMenu loose={loose} setEndMenu={setEndMenu} />}
+      <div className="footer">A game developed by GoncaloBM @ 2020</div>
     </div>
   );
 }

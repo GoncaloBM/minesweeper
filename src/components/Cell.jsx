@@ -10,7 +10,10 @@ export const Cell = ({
   dificulty,
   showFlag,
   flag,
-  board
+  board,
+  resetMenu,
+  winner,
+  loose
 }) => {
   const outerRef = useRef(null);
 
@@ -35,7 +38,7 @@ export const Cell = ({
       className="cell"
       ref={outerRef}
       style={{
-        fontFamily:'Arcade',
+        fontFamily: "Arcade",
         backgroundColor: visible && bomb ? "red" : "#bdbdbd",
         borderTop: !visible ? "2px solid white" : "2px solid #7d7d7d",
         borderLeft: !visible ? "2px solid white" : "2px solid #7d7d7d",
@@ -68,10 +71,13 @@ export const Cell = ({
             ? "#007b7b"
             : value === 8
             ? "#777777"
-            : ""
+            : "",
+        pointerEvents: (resetMenu || winner || loose) && "none"
       }}
       onClick={() =>
-        !visible || !flag ? showValue(coordenates.x, coordenates.y) : null
+        !visible 
+          ? showValue(coordenates.x, coordenates.y)
+          : null
       }
     >
       {!visible ? "" : value}

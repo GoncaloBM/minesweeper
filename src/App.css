@@ -14,7 +14,14 @@
 }
 
 .game-title {
-font-family: Arcade;
+  font-family: Arcade;
+  height: 10vh;
+}
+
+.footer {
+  position: fixed;
+  bottom: 10px;
+  font-size: 1.5rem;
 }
 
 .App-logo {
