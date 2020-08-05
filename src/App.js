@@ -268,6 +268,7 @@ function App() {
           resetMenu={resetMenu}
           winner={winner}
           setWinner={setWinner}
+          cellsPerRow={cellsPerRow}
         />
       )}
       {gameStart === false && (

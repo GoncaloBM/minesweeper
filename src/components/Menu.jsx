@@ -44,6 +44,8 @@ export const Menu = ({ changeDificulty, startGame, dificultyApp }) => {
       <div className="start-game" onClick={startGame}>
         Start Game
       </div>
+      <div className="menu-button">Instructions</div>
+      <div className="menu-button">Scoreboard</div>
     </div>
   );
 };

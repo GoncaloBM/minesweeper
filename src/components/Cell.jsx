@@ -13,7 +13,9 @@ export const Cell = ({
   board,
   resetMenu,
   winner,
-  loose
+  loose,
+  cellsPerRow,
+  rows
 }) => {
   const outerRef = useRef(null);
 
@@ -75,9 +77,7 @@ export const Cell = ({
         pointerEvents: (resetMenu || winner || loose) && "none"
       }}
       onClick={() =>
-        !visible 
-          ? showValue(coordenates.x, coordenates.y)
-          : null
+        !visible ? showValue(coordenates.x, coordenates.y) : null
       }
     >
       {!visible ? "" : value}

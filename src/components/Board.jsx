@@ -19,8 +19,9 @@ export const Board = ({
   resetMenu,
   winner,
   setWinner,
+  cellsPerRow
 }) => {
-  const win = (cel) => {
+  const win = cel => {
     let cellsWining = cel;
     cellsWining--;
 
@@ -100,7 +101,7 @@ export const Board = ({
       { x: clickX + 1, y: clickY },
       { x: clickX - 1, y: clickY + 1 },
       { x: clickX, y: clickY + 1 },
-      { x: clickX + 1, y: clickY + 1 },
+      { x: clickX + 1, y: clickY + 1 }
     ];
     for (let i = 0; i < neighboursToCheck.length; i++) {
       for (let j = 0; j < neightoChange.length; j++) {
@@ -112,35 +113,35 @@ export const Board = ({
             neighboursToCheck.push(
               {
                 x: neighboursToCheck[i]["x"] - 1,
-                y: neighboursToCheck[i]["y"] - 1,
+                y: neighboursToCheck[i]["y"] - 1
               },
               {
                 x: neighboursToCheck[i]["x"],
-                y: neighboursToCheck[i]["y"] - 1,
+                y: neighboursToCheck[i]["y"] - 1
               },
               {
                 x: neighboursToCheck[i]["x"] + 1,
-                y: neighboursToCheck[i]["y"] - 1,
+                y: neighboursToCheck[i]["y"] - 1
               },
               {
                 x: neighboursToCheck[i]["x"] - 1,
-                y: neighboursToCheck[i]["y"],
+                y: neighboursToCheck[i]["y"]
               },
               {
                 x: neighboursToCheck[i]["x"] + 1,
-                y: neighboursToCheck[i]["y"],
+                y: neighboursToCheck[i]["y"]
               },
               {
                 x: neighboursToCheck[i]["x"] - 1,
-                y: neighboursToCheck[i]["y"] + 1,
+                y: neighboursToCheck[i]["y"] + 1
               },
               {
                 x: neighboursToCheck[i]["x"],
-                y: neighboursToCheck[i]["y"] + 1,
+                y: neighboursToCheck[i]["y"] + 1
               },
               {
                 x: neighboursToCheck[i]["x"] + 1,
-                y: neighboursToCheck[i]["y"] + 1,
+                y: neighboursToCheck[i]["y"] + 1
               }
             );
           }
@@ -180,7 +181,7 @@ export const Board = ({
               ? `${rows * 50 + rows * 2 * 2}px`
               : dificulty === "Medium"
               ? `${rows * 28 + rows * 2 * 2}px`
-              : dificulty === "Hard" && `${rows * 25 + rows * 2 * 2}px`,
+              : dificulty === "Hard" && `${rows * 25 + rows * 2 * 2}px`
         }}
       >
         {board.map((cell, index) => {
@@ -199,6 +200,8 @@ export const Board = ({
               key={index}
               resetMenu={resetMenu}
               winner={winner}
+              cellsPerRow={cellsPerRow}
+              rows={rows}
             />
           );
         })}
