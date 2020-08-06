@@ -4,7 +4,6 @@ import "./Navbar.css";
 
 export const Navbar = ({
   loose,
-  resetGame,
   flagsRemaining,
   bombs,
   time,
@@ -20,10 +19,6 @@ export const Navbar = ({
     <div className="navbar" style={navbarStyle}>
       <div
         className="info-image"
-        style={{
-          backgroundImage:
-            "url(https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/237/bomb_1f4a3.png)"
-        }}
       />
       <div className="info">
         <div className="info-number">{formatNumber(time)[0]}</div>

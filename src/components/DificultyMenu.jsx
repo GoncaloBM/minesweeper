@@ -45,7 +45,7 @@ export const DificultyMenu = ({
           );
         })}
       </div>
-      ;
+      
     </div>
   );
 };

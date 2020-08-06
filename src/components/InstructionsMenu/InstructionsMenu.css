@@ -1,0 +1,69 @@
+.instructions-screen{
+    width: 40%;
+    height: 500px;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    background-color: #747f8f;
+    border-top: 4px solid white;
+    border-left: 4px solid white;
+    border-bottom: 4px solid #707070;
+    border-right: 4px solid #707070;
+}
+
+.instructions-menu {
+    height: 90%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.instruction-title {
+    height: 10%;
+    width: 100%;
+    font-family: nocontinue;
+    font-size: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.arrow {
+    height: 100%;
+    width: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('../../images/back-icon.png');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.instruction {
+    width: 90%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.instruction-image {
+    width: 100%;
+    height: 70%;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.instruction-text {
+    margin-top: 2rem;
+    font-family: nocontinue;
+    font-size: 1.5rem;
+    width: 100%;
+}

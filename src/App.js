@@ -6,6 +6,7 @@ import { Navbar } from "./components/Navbar";
 import { EndMenu } from "./components/EndMenu";
 import { ResetMenu } from "./components/ResetMenu";
 import { DificultyMenu } from "./components/DificultyMenu";
+import { InstructionsMenu } from "./components/InstructionsMenu/InstructionsMenu";
 
 function App() {
   const [gameLoaded, setGameLoaded] = useState(false);
@@ -39,6 +40,11 @@ function App() {
     setMain(false);
     setDificultyMenu(true);
   };
+
+  const goToInstructionsMenu = () => {
+    setMain(false);
+    setIntrusctionsMenu(true);
+  }
 
   const generateCells = () => {
     setFlagsRemaining(0);
@@ -292,6 +298,7 @@ function App() {
         <Menu
           startGame={startGame}
           goToDificultyMenu={goToDificultyMenu}
+          goToInstructionsMenu={goToInstructionsMenu}
         />
       )}
       {resetMenu && (
@@ -303,6 +310,7 @@ function App() {
       )}
       {endMenu && <EndMenu loose={loose} setEndMenu={setEndMenu} />}
       {dificultyMenu && <DificultyMenu dificultyApp={dificulty} changeDificulty={changeDificulty} goToMainMenu={goToMainMenu}/>}
+      {instructionsMenu && <InstructionsMenu goToMainMenu={goToMainMenu}/>}
       <div className="footer">A game developed by GoncaloBM @ 2020</div>
     </div>
   );
