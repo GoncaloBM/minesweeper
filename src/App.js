@@ -5,6 +5,7 @@ import { Menu } from "./components/Menu";
 import { Navbar } from "./components/Navbar";
 import { EndMenu } from "./components/EndMenu";
 import { ResetMenu } from "./components/ResetMenu";
+import { DificultyMenu } from "./components/DificultyMenu";
 
 function App() {
   const [gameLoaded, setGameLoaded] = useState(false);
@@ -22,6 +23,22 @@ function App() {
   const [time, setTime] = useState(0);
   const [endMenu, setEndMenu] = useState(false);
   const [resetMenu, setResetMenu] = useState(false);
+  const [main, setMain] = useState(true);
+  const [dificultyMenu, setDificultyMenu] = useState(false);
+  const [scoreMenu, setScoreMenu] = useState(false);
+  const [instructionsMenu, setIntrusctionsMenu] = useState(false);
+
+  const goToMainMenu = () => {
+    setMain(true);
+    setDificultyMenu(false);
+    setScoreMenu(false);
+    setIntrusctionsMenu(false);
+  }
+
+  const goToDificultyMenu = () => {
+    setMain(false);
+    setDificultyMenu(true);
+  };
 
   const generateCells = () => {
     setFlagsRemaining(0);
@@ -54,7 +71,7 @@ function App() {
         flag: false,
         bomb: false,
         value: 0,
-        visible: false
+        visible: false,
       });
 
       currentCell++;
@@ -67,7 +84,7 @@ function App() {
     randomBombs(allCells);
   };
 
-  const randomBombs = all => {
+  const randomBombs = (all) => {
     let currentBoard = all;
     let numberOfBombs = bombs;
     while (numberOfBombs) {
@@ -94,7 +111,7 @@ function App() {
     generateValues(currentBoard);
   };
 
-  const generateValues = boardWithBombs => {
+  const generateValues = (boardWithBombs) => {
     let currentBoard = boardWithBombs;
     for (let i = 0; i < currentBoard.length; i++) {
       let currentX = currentBoard[i]["coordenates"]["x"];
@@ -175,7 +192,7 @@ function App() {
     setFlagsRemaining(flagsInGame);
   };
 
-  const changeDificulty = difi => {
+  const changeDificulty = (difi) => {
     setDificulty(difi);
   };
 
@@ -235,7 +252,7 @@ function App() {
 
   return (
     <div className="App">
-      <div className="game-title" style={{ fontSize: "4rem" }}>
+      <div className="game-title" style={{ fontSize: !gameStart ? "16rem" : '4rem'}}>
         Minesweeper
       </div>
       {gameStart === true && (
@@ -271,11 +288,10 @@ function App() {
           cellsPerRow={cellsPerRow}
         />
       )}
-      {gameStart === false && (
+      {gameStart === false && main && (
         <Menu
-          changeDificulty={changeDificulty}
           startGame={startGame}
-          dificultyApp={dificulty}
+          goToDificultyMenu={goToDificultyMenu}
         />
       )}
       {resetMenu && (
@@ -286,6 +302,7 @@ function App() {
         />
       )}
       {endMenu && <EndMenu loose={loose} setEndMenu={setEndMenu} />}
+      {dificultyMenu && <DificultyMenu dificultyApp={dificulty} changeDificulty={changeDificulty} goToMainMenu={goToMainMenu}/>}
       <div className="footer">A game developed by GoncaloBM @ 2020</div>
     </div>
   );

@@ -4,7 +4,9 @@ import './index.css';
 import App from './App';
 import './fonts/Crashed Scoreboard.ttf';
 import './fonts/game_over.ttf';
-import './fonts/Arcade.TTF'
+import './fonts/Arcade.TTF';
+import './fonts/playgame.otf';
+import './fonts/nocontinue.ttf'
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(

@@ -26,3 +26,13 @@ code {
   font-family: 'Arcade';
   src: local('Arcade'), url(./fonts/Arcade.TTF) format('truetype');
 }
+
+@font-face {
+  font-family: 'playgame';
+  src: local('playgame'), url(./fonts/playgame.otf) format('truetype');
+}
+
+@font-face {
+  font-family: 'nocontinue';
+  src: local('nocontinue'), url(./fonts/nocontinue.ttf) format('truetype');
+}

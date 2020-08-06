@@ -1,0 +1,58 @@
+.dificulty-menu {
+    width:30%;
+    border: 1px solid black;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background-color: white;
+    background-color: #747f8f;
+    border-top: 4px solid white;
+    border-left: 4px solid white;
+    border-bottom: 4px solid #707070;
+    border-right: 4px solid #707070;
+}
+
+.selection-text {
+    font-size: 2rem;
+    font-family: nocontinue;
+    margin: 10px;
+  }
+
+.dificulties {
+    display: flex;
+  }
+  
+  .dificulty-button {
+    font-family: nocontinue;
+    margin: 5px;
+    width: 150px;
+    height: 2.5rem;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    cursor: pointer;
+    transition: 0.5s all;
+  }
+
+  .back-icon {
+      margin-top: 10px;
+      height: 50px;
+      width: 50px;
+      border: 1px solid #767676;
+      border-radius: 50%;
+      background-image: url('../images//back-icon.png');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-color: #bdbdbd;
+      cursor: pointer;
+      transition: 0.5s all;
+  }
+
+  .back-icon:hover {
+    background-color: white;
+  }
