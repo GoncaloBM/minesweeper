@@ -21,12 +21,14 @@
 
 .dificulties {
     display: flex;
+    width: 100%;
+    justify-content: center;
   }
   
   .dificulty-button {
     font-family: nocontinue;
     margin: 5px;
-    width: 150px;
+    width: 28%;
     height: 2.5rem;
   
     display: flex;

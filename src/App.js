@@ -7,6 +7,7 @@ import { EndMenu } from "./components/EndMenu";
 import { ResetMenu } from "./components/ResetMenu";
 import { DificultyMenu } from "./components/DificultyMenu";
 import { InstructionsMenu } from "./components/InstructionsMenu/InstructionsMenu";
+import { ScoreMenu } from "./components/ScoreMenu/ScoreMenu";
 
 function App() {
   const [gameLoaded, setGameLoaded] = useState(false);
@@ -34,7 +35,7 @@ function App() {
     setDificultyMenu(false);
     setScoreMenu(false);
     setIntrusctionsMenu(false);
-  }
+  };
 
   const goToDificultyMenu = () => {
     setMain(false);
@@ -44,6 +45,11 @@ function App() {
   const goToInstructionsMenu = () => {
     setMain(false);
     setIntrusctionsMenu(true);
+  };
+
+  const goToScores = () => {
+    setMain(false);
+    setScoreMenu(true);
   }
 
   const generateCells = () => {
@@ -258,7 +264,10 @@ function App() {
 
   return (
     <div className="App">
-      <div className="game-title" style={{ fontSize: !gameStart ? "16rem" : '4rem'}}>
+      <div
+        className="game-title"
+        style={{ fontSize: gameStart || instructionsMenu || scoreMenu ? "4rem" : "12rem" }}
+      >
         Minesweeper
       </div>
       {gameStart === true && (
@@ -299,6 +308,7 @@ function App() {
           startGame={startGame}
           goToDificultyMenu={goToDificultyMenu}
           goToInstructionsMenu={goToInstructionsMenu}
+          goToScores={goToScores}
         />
       )}
       {resetMenu && (
@@ -309,8 +319,15 @@ function App() {
         />
       )}
       {endMenu && <EndMenu loose={loose} setEndMenu={setEndMenu} />}
-      {dificultyMenu && <DificultyMenu dificultyApp={dificulty} changeDificulty={changeDificulty} goToMainMenu={goToMainMenu}/>}
-      {instructionsMenu && <InstructionsMenu goToMainMenu={goToMainMenu}/>}
+      {dificultyMenu && (
+        <DificultyMenu
+          dificultyApp={dificulty}
+          changeDificulty={changeDificulty}
+          goToMainMenu={goToMainMenu}
+        />
+      )}
+      {instructionsMenu && <InstructionsMenu goToMainMenu={goToMainMenu} />}
+      {scoreMenu && <ScoreMenu goToMainMenu={goToMainMenu}/>}
       <div className="footer">A game developed by GoncaloBM @ 2020</div>
     </div>
   );
