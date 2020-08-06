@@ -8,6 +8,9 @@ import { ResetMenu } from "./components/ResetMenu";
 import { DificultyMenu } from "./components/DificultyMenu";
 import { InstructionsMenu } from "./components/InstructionsMenu/InstructionsMenu";
 import { ScoreMenu } from "./components/ScoreMenu/ScoreMenu";
+import { selectAudio, bombAudio, startAudio } from "./components/audios";
+import SoundIcon from "./images/sound.png";
+import MuteIcon from "./images/mute.png";
 
 function App() {
   const [gameLoaded, setGameLoaded] = useState(false);
@@ -29,8 +32,10 @@ function App() {
   const [dificultyMenu, setDificultyMenu] = useState(false);
   const [scoreMenu, setScoreMenu] = useState(false);
   const [instructionsMenu, setIntrusctionsMenu] = useState(false);
+  const [sound, setSound] = useState(true);
 
   const goToMainMenu = () => {
+    sound && selectAudio.play();
     setMain(true);
     setDificultyMenu(false);
     setScoreMenu(false);
@@ -38,19 +43,22 @@ function App() {
   };
 
   const goToDificultyMenu = () => {
+    sound && selectAudio.play();
     setMain(false);
     setDificultyMenu(true);
   };
 
   const goToInstructionsMenu = () => {
+    sound && selectAudio.play();
     setMain(false);
     setIntrusctionsMenu(true);
   };
 
   const goToScores = () => {
+    sound && selectAudio.play();
     setMain(false);
     setScoreMenu(true);
-  }
+  };
 
   const generateCells = () => {
     setFlagsRemaining(0);
@@ -209,6 +217,7 @@ function App() {
   };
 
   const looseGame = () => {
+    sound && bombAudio.play();
     setLoose(true);
     setStartTimer(false);
   };
@@ -228,6 +237,7 @@ function App() {
   };
 
   const startGame = () => {
+    sound && startAudio.play();
     setGameStart(true);
     setGameLoaded(true);
     setStartTimer(true);
@@ -265,8 +275,18 @@ function App() {
   return (
     <div className="App">
       <div
+        className="sound-icon"
+        onClick={() => setSound(!sound)}
+        style={{
+          backgroundImage: sound ? `url(${SoundIcon})` : `url(${MuteIcon})`,
+        }}
+      ></div>
+      <div
         className="game-title"
-        style={{ fontSize: gameStart || instructionsMenu || scoreMenu ? "4rem" : "12rem" }}
+        style={{
+          fontSize:
+            gameStart || instructionsMenu || scoreMenu ? "4rem" : "12rem",
+        }}
       >
         Minesweeper
       </div>
@@ -301,6 +321,7 @@ function App() {
           winner={winner}
           setWinner={setWinner}
           cellsPerRow={cellsPerRow}
+          sound={sound}
         />
       )}
       {gameStart === false && main && (
@@ -327,7 +348,7 @@ function App() {
         />
       )}
       {instructionsMenu && <InstructionsMenu goToMainMenu={goToMainMenu} />}
-      {scoreMenu && <ScoreMenu goToMainMenu={goToMainMenu}/>}
+      {scoreMenu && <ScoreMenu goToMainMenu={goToMainMenu} />}
       <div className="footer">A game developed by GoncaloBM @ 2020</div>
     </div>
   );

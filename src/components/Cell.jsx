@@ -14,8 +14,6 @@ export const Cell = ({
   resetMenu,
   winner,
   loose,
-  cellsPerRow,
-  rows
 }) => {
   const outerRef = useRef(null);
 
