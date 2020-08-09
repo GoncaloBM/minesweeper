@@ -57,3 +57,9 @@
   .back-icon:hover {
     background-color: white;
   }
+
+  @media only screen and (max-width: 500px) {
+    .dificulty-menu{
+      width: 90%;
+    }
+  }

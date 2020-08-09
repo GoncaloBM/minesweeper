@@ -13,6 +13,7 @@ import SoundIcon from "./images/sound.png";
 import MuteIcon from "./images/mute.png";
 
 function App() {
+  const [mobile, setMobile] = useState(false);
   const [gameLoaded, setGameLoaded] = useState(false);
   const [dificulty, setDificulty] = useState("Easy");
   const [gameStart, setGameStart] = useState(false);
@@ -285,7 +286,9 @@ function App() {
         className="game-title"
         style={{
           fontSize:
-            gameStart || instructionsMenu || scoreMenu ? "4rem" : "12rem",
+            gameStart || instructionsMenu || scoreMenu  || window.innerWidth < 500
+              ? "3rem"
+              : "12rem",
         }}
       >
         Minesweeper
@@ -339,7 +342,14 @@ function App() {
           setResetMenu={setResetMenu}
         />
       )}
-      {endMenu && <EndMenu loose={loose} setEndMenu={setEndMenu} dificulty={dificulty} time={time}/>}
+      {endMenu && (
+        <EndMenu
+          loose={loose}
+          setEndMenu={setEndMenu}
+          dificulty={dificulty}
+          time={time}
+        />
+      )}
       {dificultyMenu && (
         <DificultyMenu
           dificultyApp={dificulty}
