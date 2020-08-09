@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./ScoreMenu.css";
 
-export const ScoreMenu = ({ goToMainMenu }) => {
+export const ScoreMenu = ({ goToMainMenu, dificulty }) => {
   const [scores, setScores] = useState([]);
   const [dificultyScore, setDificultyScore] = useState("Easy");
   const dificulties = ["Easy", "Medium", "Hard"];
@@ -12,11 +12,12 @@ export const ScoreMenu = ({ goToMainMenu }) => {
   const changeScoreDificulty = (e) => {
     setDificultyScore(e);
   };
-
+  // http://94.46.171.95/test
+  // http://localhost:3001/test
   const fetchScores = () => {
     setFetchingScores(true);
     axios
-      .get("http://94.46.171.95/test")
+      .get(`http://94.46.171.95/test/${dificultyScore}`)
       .then((res) => {
         setScores(res.data);
       })
@@ -25,7 +26,7 @@ export const ScoreMenu = ({ goToMainMenu }) => {
 
   useEffect(() => {
     fetchScores();
-  }, [fetchingScores]);
+  }, [fetchingScores, dificultyScore]);
 
   return (
     <>
@@ -80,7 +81,7 @@ export const ScoreMenu = ({ goToMainMenu }) => {
               {scores.map((score, index) => {
                 return (
                   <tr>
-                    <th>{index}</th>
+                    <th>{index+1}</th>
                     <th>{score.user}</th>
                     <th>{score.time}</th>
                   </tr>

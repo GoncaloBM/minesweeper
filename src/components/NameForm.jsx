@@ -1,13 +1,35 @@
 import React, { useState } from "react";
+import axios from "axios";
 import "./NameForm.css";
 
-export const NameForm = () => {
-  const [name, setName] = useState("");
+export const NameForm = ({ time, dificulty }) => {
+  const [user, setUser] = useState("");
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
 
-  const changeName = e => {
-    setName(e.target.value);
+  const changeName = (e) => {
+    setUser(e.target.value);
+  };
+
+  // https://localhost:3001
+  // `http://94.46.171.95/minesweeper/scores`
+  const sendTime = () => {
+    if (user) {
+      setSending(true);
+      axios
+        .post(`http://94.46.171.95/minesweeper/scores/`, {
+          user: user,
+          time: time,
+          dificulty: dificulty,
+        })
+        .then((res) => {
+          console.log(res);
+          setSending(false);
+          setSent(true);
+        });
+    } else {
+      alert("Please put some name in field");
+    }
   };
 
   return (
@@ -19,6 +41,7 @@ export const NameForm = () => {
       />
       <div
         className="sending-button"
+        onClick={sendTime}
         style={{
           backgroundImage:
             !sending && !sent
@@ -27,7 +50,7 @@ export const NameForm = () => {
               ? `url('https://www.simplificpavarini.com.br/006/images/loading3.gif')`
               : sending &&
                 sent &&
-                `url('https://www.yhangry.com/assets/images/checkmark-gif.gif')`
+                `url('https://www.yhangry.com/assets/images/checkmark-gif.gif')`,
         }}
       />
     </div>

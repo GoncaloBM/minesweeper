@@ -339,7 +339,7 @@ function App() {
           setResetMenu={setResetMenu}
         />
       )}
-      {endMenu && <EndMenu loose={loose} setEndMenu={setEndMenu} />}
+      {endMenu && <EndMenu loose={loose} setEndMenu={setEndMenu} dificulty={dificulty} time={time}/>}
       {dificultyMenu && (
         <DificultyMenu
           dificultyApp={dificulty}
@@ -348,7 +348,9 @@ function App() {
         />
       )}
       {instructionsMenu && <InstructionsMenu goToMainMenu={goToMainMenu} />}
-      {scoreMenu && <ScoreMenu goToMainMenu={goToMainMenu} />}
+      {scoreMenu && (
+        <ScoreMenu goToMainMenu={goToMainMenu} dificulty={dificulty} />
+      )}
       <div className="footer">A game developed by GoncaloBM @ 2020</div>
     </div>
   );
