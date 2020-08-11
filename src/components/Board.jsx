@@ -172,7 +172,10 @@ export const Board = ({
   };
 
   return (
-    <div className="game">
+    <div
+      className="game"
+      style={{ display: window.innerWidth < 500 ? "" : "flex"}}
+    >
       <div
         className="board"
         style={{
@@ -180,11 +183,14 @@ export const Board = ({
           display: "grid",
           gridTemplateColumns: `repeat(${rows},auto)`,
           width:
-            dificulty === "Easy"
+            dificulty === "Easy" && window.innerWidth < 500
+              ? `${rows * 35 + rows * 2 * 2}px`
+              : dificulty === "Easy" && window.innerWidth > 500
               ? `${rows * 50 + rows * 2 * 2}px`
               : dificulty === "Medium"
               ? `${rows * 28 + rows * 2 * 2}px`
               : dificulty === "Hard" && `${rows * 25 + rows * 2 * 2}px`,
+              margin: ' 0 auto'
         }}
       >
         {board.map((cell, index) => {

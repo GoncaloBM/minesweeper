@@ -8,7 +8,7 @@ export const ResetMenu = ({ resetGame, mainMenu, setResetMenu }) => {
     /**
      * Alert if clicked on outside of element
      */
-    const handleClickOutside = event => {
+    const handleClickOutside = (event) => {
       if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
         setResetMenu(false);
       }
@@ -23,7 +23,11 @@ export const ResetMenu = ({ resetGame, mainMenu, setResetMenu }) => {
   }, [wrapperRef]);
 
   return (
-    <div className="reset-menu" ref={wrapperRef}>
+    <div
+      className="reset-menu"
+      ref={wrapperRef}
+      style={{ width: window.innerWidth < 500 ? "80%" : "50%" }}
+    >
       <div className="reset-option" onClick={resetGame}>
         Reset Game
       </div>

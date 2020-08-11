@@ -33,7 +33,6 @@
   align-items: center;
   justify-content: space-around;
   height: 60%;
-  width: 10%;
   font-family: Crashed;
   margin: 5px;
 }
@@ -52,6 +51,8 @@
 }
 
 .navbar {
+  position: absolute;
+  top: 5%;
   display: flex;
   align-items: center;
   justify-content: center;

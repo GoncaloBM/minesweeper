@@ -14,12 +14,11 @@ export const Cell = ({
   resetMenu,
   winner,
   loose,
-  
 }) => {
   const outerRef = useRef(null);
 
   const pressedRight = useCallback(
-    event => {
+    (event) => {
       event.preventDefault();
       if (outerRef && outerRef.current.contains(event.target)) {
         showFlag(coordenates.x, coordenates.y);
@@ -45,9 +44,22 @@ export const Cell = ({
         borderLeft: !visible ? "2px solid white" : "2px solid #7d7d7d",
         borderRight: !visible ? "2px solid #707070" : "2px solid #7d7d7d",
         borderBottom: !visible ? "2px solid #707070" : "2px solid #7d7d7d",
-        width: dificulty === "Medium" ? "28px" : dificulty === "Hard" && "25px",
+        width:
+          dificulty === "Medium"
+            ? "28px"
+            : dificulty === "Hard"
+            ? "25px"
+            : dificulty === "Easy" && window.innerWidth < 500
+            ? "35px"
+            : dificulty === "Easy" && window.innerWidth > 500 && "50px",
         height:
-          dificulty === "Medium" ? "28px" : dificulty === "Hard" && "25px",
+          dificulty === "Medium"
+            ? "28px"
+            : dificulty === "Hard"
+            ? "25px"
+            : dificulty === "Easy" && window.innerWidth < 500
+            ? "35px"
+            : dificulty === "Easy" && window.innerWidth > 500 && "50px",
         backgroundImage: flag
           ? "url('https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/15574596561537355607-512.png')"
           : value === "B" &&
@@ -73,7 +85,7 @@ export const Cell = ({
             : value === 8
             ? "#777777"
             : "",
-        pointerEvents: (resetMenu || winner || loose) && "none"
+        pointerEvents: (resetMenu || winner || loose) && "none",
       }}
       onClick={() =>
         !visible ? showValue(coordenates.x, coordenates.y) : null

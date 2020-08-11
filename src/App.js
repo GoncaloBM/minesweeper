@@ -13,7 +13,6 @@ import SoundIcon from "./images/sound.png";
 import MuteIcon from "./images/mute.png";
 
 function App() {
-  const [mobile, setMobile] = useState(false);
   const [gameLoaded, setGameLoaded] = useState(false);
   const [dificulty, setDificulty] = useState("Easy");
   const [gameStart, setGameStart] = useState(false);

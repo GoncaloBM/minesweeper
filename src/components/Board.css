@@ -1,9 +1,10 @@
 .game {
   width: 100%;
   height: 75vh;
-  overflow: hidden;
-  top: 15%;
-  display: flex;
+  overflow: scroll;
+  top: 20%;
+  position: absolute;
+
   flex-direction: column;
   align-items: center;
   justify-content: center;

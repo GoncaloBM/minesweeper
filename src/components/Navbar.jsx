@@ -7,20 +7,18 @@ export const Navbar = ({
   flagsRemaining,
   bombs,
   time,
-  setResetMenu
+  setResetMenu,
 }) => {
   const navbarStyle = {
     display: "flex",
     alignItems: "center",
-    height: "10vh"
+    height: "10vh",
   };
 
   return (
     <div className="navbar" style={navbarStyle}>
-      <div
-        className="info-image"
-      />
-      <div className="info">
+      <div className="info-image" />
+      <div className="info" style={{ width: window.innerWidth < 500 ? "20%" : "10%" }}>
         <div className="info-number">{formatNumber(time)[0]}</div>
         <div className="info-number">{formatNumber(time)[1]}</div>
         <div className="info-number">{formatNumber(time)[2]}</div>
@@ -36,7 +34,10 @@ export const Navbar = ({
           setResetMenu(true);
         }}
       />
-      <div className="info">
+      <div
+        className="info"
+        style={{ width: window.innerWidth < 500 ? "20%" : "10%" }}
+      >
         <div className="info-number">
           {formatNumber(bombs - flagsRemaining)[0]}
         </div>
@@ -51,7 +52,7 @@ export const Navbar = ({
         className="info-image"
         style={{
           backgroundImage:
-            "url(https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/15574596561537355607-512.png)"
+            "url(https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/15574596561537355607-512.png)",
         }}
       />
     </div>
