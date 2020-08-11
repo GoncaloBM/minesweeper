@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./NameForm.css";
+import { ScoresReceived } from "./scoresReceived/ScoresReceived";
 
 export const NameForm = ({ time, dificulty }) => {
   const [user, setUser] = useState("");
@@ -64,26 +65,31 @@ export const NameForm = ({ time, dificulty }) => {
   }, [scoresFromDB]);
 
   return (
-    <div className="form">
-      <input
-        className="name-to-send"
-        onChange={changeName}
-        placeholder="Your name here..."
-      />
-      <div
-        className="sending-button"
-        onClick={sendTime}
-        style={{
-          backgroundImage:
-            !sending && !sent
-              ? `url('https://cdn4.iconfinder.com/data/icons/materia-social-free/24/038_028_share_link_friends_send_android_material-512.png')`
-              : sending && !sent
-              ? `url('https://www.simplificpavarini.com.br/006/images/loading3.gif')`
-              : !sending &&
-                sent &&
-                `url('https://www.yhangry.com/assets/images/checkmark-gif.gif')`,
-        }}
-      />
-    </div>
+    <>
+      {!sent && (
+        <div className="form">
+          <input
+            className="name-to-send"
+            onChange={changeName}
+            placeholder="Your name here..."
+          />
+          <div
+            className="sending-button"
+            onClick={sendTime}
+            style={{
+              backgroundImage:
+                !sending && !sent
+                  ? `url('https://cdn4.iconfinder.com/data/icons/materia-social-free/24/038_028_share_link_friends_send_android_material-512.png')`
+                  : sending && !sent
+                  ? `url('https://www.simplificpavarini.com.br/006/images/loading3.gif')`
+                  : !sending &&
+                    sent &&
+                    `url('https://www.yhangry.com/assets/images/checkmark-gif.gif')`,
+            }}
+          />
+        </div>
+      )}
+      {sent && <ScoresReceived scoresToDisplay={scoresToDisplay} />}
+    </>
   );
 };
