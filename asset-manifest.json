@@ -1,0 +1,36 @@
+{
+  "files": {
+    "main.css": "/GoncaloBM/minesweeper/static/css/main.73342392.chunk.css",
+    "main.js": "/GoncaloBM/minesweeper/static/js/main.42ce0fb0.chunk.js",
+    "main.js.map": "/GoncaloBM/minesweeper/static/js/main.42ce0fb0.chunk.js.map",
+    "runtime-main.js": "/GoncaloBM/minesweeper/static/js/runtime-main.8d0653c0.js",
+    "runtime-main.js.map": "/GoncaloBM/minesweeper/static/js/runtime-main.8d0653c0.js.map",
+    "static/js/2.c1fe6e06.chunk.js": "/GoncaloBM/minesweeper/static/js/2.c1fe6e06.chunk.js",
+    "static/js/2.c1fe6e06.chunk.js.map": "/GoncaloBM/minesweeper/static/js/2.c1fe6e06.chunk.js.map",
+    "index.html": "/GoncaloBM/minesweeper/index.html",
+    "precache-manifest.2e63967b5bc8c3251e2102cf7401a15b.js": "/GoncaloBM/minesweeper/precache-manifest.2e63967b5bc8c3251e2102cf7401a15b.js",
+    "service-worker.js": "/GoncaloBM/minesweeper/service-worker.js",
+    "static/css/main.73342392.chunk.css.map": "/GoncaloBM/minesweeper/static/css/main.73342392.chunk.css.map",
+    "static/js/2.c1fe6e06.chunk.js.LICENSE.txt": "/GoncaloBM/minesweeper/static/js/2.c1fe6e06.chunk.js.LICENSE.txt",
+    "static/media/Arcade.TTF": "/GoncaloBM/minesweeper/static/media/Arcade.96411199.TTF",
+    "static/media/Crashed Scoreboard.ttf": "/GoncaloBM/minesweeper/static/media/Crashed Scoreboard.9d65f4e6.ttf",
+    "static/media/Instructions-1.png": "/GoncaloBM/minesweeper/static/media/Instructions-1.c335dbc3.png",
+    "static/media/Instructions-2.png": "/GoncaloBM/minesweeper/static/media/Instructions-2.bb4229ad.png",
+    "static/media/Instructions-3.png": "/GoncaloBM/minesweeper/static/media/Instructions-3.e88d3e12.png",
+    "static/media/Instructions-4.png": "/GoncaloBM/minesweeper/static/media/Instructions-4.3eb3cba0.png",
+    "static/media/Instructions-5.png": "/GoncaloBM/minesweeper/static/media/Instructions-5.86fb13c3.png",
+    "static/media/Instructions-7.png": "/GoncaloBM/minesweeper/static/media/Instructions-7.fde61be7.png",
+    "static/media/Instructions.png": "/GoncaloBM/minesweeper/static/media/Instructions.88c1bb23.png",
+    "static/media/InstructionsMenu.css": "/GoncaloBM/minesweeper/static/media/back-icon.b4b0e779.png",
+    "static/media/game_over.ttf": "/GoncaloBM/minesweeper/static/media/game_over.e9cd5ec4.ttf",
+    "static/media/ScoreMenu.css": "/GoncaloBM/minesweeper/static/media/loading.f6cd1e34.gif",
+    "static/media/nocontinue.ttf": "/GoncaloBM/minesweeper/static/media/nocontinue.ed80e29a.ttf",
+    "static/media/playgame.otf": "/GoncaloBM/minesweeper/static/media/playgame.72cdc278.otf"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.8d0653c0.js",
+    "static/js/2.c1fe6e06.chunk.js",
+    "static/css/main.73342392.chunk.css",
+    "static/js/main.42ce0fb0.chunk.js"
+  ]
+}
