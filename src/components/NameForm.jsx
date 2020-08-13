@@ -20,7 +20,7 @@ export const NameForm = ({ time, dificulty }) => {
     if (user) {
       setSending(true);
       axios
-        .post(`http://94.46.171.95/minesweeper/scores/`, {
+        .post(`https://goncalobmira.online/minesweeper/scores/`, {
           user: user,
           time: time,
           dificulty: dificulty,
