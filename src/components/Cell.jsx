@@ -14,6 +14,7 @@ export const Cell = ({
   resetMenu,
   winner,
   loose,
+  flagChosen,
 }) => {
   const outerRef = useRef(null);
 
@@ -88,7 +89,11 @@ export const Cell = ({
         pointerEvents: (resetMenu || winner || loose) && "none",
       }}
       onClick={() =>
-        !visible ? showValue(coordenates.x, coordenates.y) : null
+        !visible
+          ? !flagChosen
+            ? showValue(coordenates.x, coordenates.y)
+            : showFlag(coordenates.x, coordenates.y)
+          : null
       }
     >
       {!visible ? "" : value}

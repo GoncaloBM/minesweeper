@@ -23,6 +23,7 @@ function App() {
   const [cellsPerRow, setCellsPerRows] = useState(9);
   const [bombs, setBombs] = useState(10);
   const [flagsRemaining, setFlagsRemaining] = useState(0);
+  const [flagChosen, setFlagChosen] = useState(false);
   const [cellsToWin, setCellsToWin] = useState(rows * cellsPerRow);
   const [startTimer, setStartTimer] = useState(false);
   const [time, setTime] = useState(0);
@@ -285,7 +286,10 @@ function App() {
         className="game-title"
         style={{
           fontSize:
-            gameStart || instructionsMenu || scoreMenu  || window.innerWidth < 500
+            gameStart ||
+            instructionsMenu ||
+            scoreMenu ||
+            window.innerWidth < 500
               ? "3rem"
               : "12rem",
         }}
@@ -302,6 +306,8 @@ function App() {
           startGame={startGame}
           setResetMenu={setResetMenu}
           resetMenu={resetMenu}
+          flagChosen={flagChosen}
+          setFlagChosen={setFlagChosen}
         />
       )}
       {gameStart === true && (
@@ -324,6 +330,7 @@ function App() {
           setWinner={setWinner}
           cellsPerRow={cellsPerRow}
           sound={sound}
+          flagChosen={flagChosen}
         />
       )}
       {gameStart === false && main && (

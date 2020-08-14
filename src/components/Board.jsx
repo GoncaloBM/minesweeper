@@ -22,6 +22,7 @@ export const Board = ({
   setWinner,
   cellsPerRow,
   sound,
+  flagChosen,
 }) => {
   const win = (cel) => {
     let cellsWining = cel;
@@ -174,7 +175,7 @@ export const Board = ({
   return (
     <div
       className="game"
-      style={{ display: window.innerWidth < 500 ? "" : "flex"}}
+      style={{ display: window.innerWidth < 500 ? "" : "flex" }}
     >
       <div
         className="board"
@@ -190,7 +191,7 @@ export const Board = ({
               : dificulty === "Medium"
               ? `${rows * 28 + rows * 2 * 2}px`
               : dificulty === "Hard" && `${rows * 25 + rows * 2 * 2}px`,
-              margin: ' 0 auto'
+          margin: " 0 auto",
         }}
       >
         {board.map((cell, index) => {
@@ -211,6 +212,7 @@ export const Board = ({
               winner={winner}
               cellsPerRow={cellsPerRow}
               rows={rows}
+              flagChosen={flagChosen}
             />
           );
         })}

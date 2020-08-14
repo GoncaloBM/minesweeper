@@ -9,7 +9,7 @@ import Instruction6 from "../../images/Instructions-5.png";
 import Instruction7 from "../../images/Instructions-6.png";
 import Instruction8 from "../../images/Instructions-7.png";
 
-export const InstructionsMenu = ({goToMainMenu}) => {
+export const InstructionsMenu = ({ goToMainMenu }) => {
   const instructions = [
     {
       text: "This is your playground",
@@ -39,7 +39,7 @@ export const InstructionsMenu = ({goToMainMenu}) => {
     },
     {
       text:
-        "If you think that you spot a bomb, place a flag with the right click so you won't click there and loose. If you want to remove that flag, right click again.",
+        "If you think that you spot a bomb, place a flag with the right click so you won't click there and loose. If you want to remove that flag, right click again. In mobile click and unclick on the flag symbol to place a flag",
       image: Instruction7,
     },
     {
@@ -69,26 +69,29 @@ export const InstructionsMenu = ({goToMainMenu}) => {
     setInstruction(instructions[numberInstruction]);
   }, [numberInstruction]);
 
-  return (<>
-    <div className="instructions-screen">
+  return (
+    <>
+      <div className="instructions-screen">
         <div className="instruction-title">Instructions</div>
-      <div className="instructions-menu">
-        <div className="arrow" onClick={() => nextInstruction(-1)}></div>
-        <div className="instruction">
+        <div className="instructions-menu">
+          <div className="arrow" onClick={() => nextInstruction(-1)}></div>
+          <div className="instruction">
+            <div
+              className="instruction-image"
+              style={{ backgroundImage: `url(${instruction.image})` }}
+            ></div>
+            <div className="instruction-text">{instruction.text}</div>
+          </div>
           <div
-            className="instruction-image"
-            style={{ backgroundImage: `url(${instruction.image})` }}
+            className="arrow"
+            style={{ transform: "rotate(180deg)" }}
+            onClick={() => nextInstruction(1)}
           ></div>
-          <div className="instruction-text">{instruction.text}</div>
         </div>
-        <div
-          className="arrow"
-          style={{ transform: "rotate(180deg)" }}
-          onClick={() => nextInstruction(1)}
-        ></div>
       </div>
-    </div>
-    <div className="menu-button" onClick={goToMainMenu}>Main Menu</div>
+      <div className="menu-button" onClick={goToMainMenu}>
+        Main Menu
+      </div>
     </>
   );
 };
