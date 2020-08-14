@@ -26,8 +26,8 @@ function App() {
   const [flagChosen, setFlagChosen] = useState(false);
   const [cellsToWin, setCellsToWin] = useState(rows * cellsPerRow);
   const [startTimer, setStartTimer] = useState(false);
-  const [time, setTime] = useState(89);
-  const [endMenu, setEndMenu] = useState(true);
+  const [time, setTime] = useState(0);
+  const [endMenu, setEndMenu] = useState(false);
   const [resetMenu, setResetMenu] = useState(false);
   const [main, setMain] = useState(true);
   const [dificultyMenu, setDificultyMenu] = useState(false);
