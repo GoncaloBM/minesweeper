@@ -17,7 +17,7 @@ export const ScoreMenu = ({ goToMainMenu, dificulty }) => {
   const fetchScores = () => {
     setFetchingScores(true);
     axios
-      .get(`https://www.goncalobmira.online/test/${dificultyScore}`)
+      .get(`https://www.goncalobmira.online/api/test/${dificultyScore}`)
       .then((res) => {
         setScores(res.data);
       })
