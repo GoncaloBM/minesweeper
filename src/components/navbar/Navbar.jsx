@@ -1,5 +1,5 @@
 import React from "react";
-import { formatNumber } from "../functions/formatNumber";
+import { formatNumber } from "../../functions/formatNumber";
 import "./Navbar.css";
 
 export const Navbar = ({

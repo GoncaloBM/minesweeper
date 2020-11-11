@@ -7,7 +7,6 @@ export const ScoreMenu = ({ goToMainMenu, dificulty }) => {
   const [dificultyScore, setDificultyScore] = useState("Easy");
   const dificulties = ["Easy", "Medium", "Hard"];
   const [fetchingScores, setFetchingScores] = useState(false);
-  const [fetched, setFetched] = useState(false);
 
   const changeScoreDificulty = (e) => {
     setDificultyScore(e);

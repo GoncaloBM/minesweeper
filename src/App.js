@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import { Board } from "./components/Board.jsx";
-import { Menu } from "./components/Menu";
-import { Navbar } from "./components/Navbar";
-import { EndMenu } from "./components/EndMenu";
-import { ResetMenu } from "./components/ResetMenu";
-import { DificultyMenu } from "./components/DificultyMenu";
+import { Board } from "./components/board/Board.jsx";
+import { Menu } from "./components/menus/main/Menu";
+import { Navbar } from "./components/navbar/Navbar";
+import { EndMenu } from "./components/menus/end/EndMenu";
+import { ResetMenu } from "./components/menus/reset/ResetMenu";
+import { DificultyMenu } from "./components/menus/difficulty/DificultyMenu";
 import { InstructionsMenu } from "./components/InstructionsMenu/InstructionsMenu";
 import { ScoreMenu } from "./components/ScoreMenu/ScoreMenu";
 import { selectAudio, bombAudio, startAudio } from "./components/audios";

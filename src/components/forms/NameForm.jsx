@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./NameForm.css";
-import { ScoresReceived } from "./scoresReceived/ScoresReceived";
+import { ScoresReceived } from "../scoresReceived/ScoresReceived";
 
 export const NameForm = ({ time, dificulty }) => {
   const [user, setUser] = useState("");

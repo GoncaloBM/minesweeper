@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NameForm } from "./NameForm";
+import { NameForm } from "../../forms/NameForm";
 import "./EndMenu.css";
 
 export const EndMenu = ({ loose, setEndMenu, dificulty, time }) => {

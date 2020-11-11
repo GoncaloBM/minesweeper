@@ -1,7 +1,7 @@
 import React from "react";
 import "./Board.css";
-import { Cell } from "./Cell";
-import { winAudio } from "./audios";
+import { Cell } from "./cell/Cell";
+import { winAudio } from "../audios";
 
 export const Board = ({
   dificulty,
